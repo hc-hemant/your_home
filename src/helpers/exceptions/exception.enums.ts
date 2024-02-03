@@ -1,0 +1,14 @@
+export enum HttpStatusCode {
+    "OK" = 200,
+    "INTERNAL_SERVER_ERROR" = 500,
+    "UNAUTHORIZED" = 403,
+    "NOT_FOUND" = 400,
+    "BAD_REQUEST" = 404,
+    "UNPROCESSABLE_ENTITY" = 420
+}
+
+export enum ErrorCode {
+    "DUPLICATE_ENTITY" = "DUPLICATE_ENTITY",
+    "NOT_EXIST" = "NOT_EXIST",
+    "INVALID_CREDENTIALS" = "INVALID_CREDENTIALS",
+}
