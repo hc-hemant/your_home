@@ -13,21 +13,15 @@ export class AuthService {
         this.userController = new UserController();
     }
 
-    async signInUser(userDetails: IUser, password: string, deviceToken: string): Promise<UserResponseModel | HttpException> {
+    async signInUser(userDetails: IUser, password: string): Promise<UserResponseModel | HttpException> {
         const isEqual = await Encryptor.compare(password, userDetails.password);
         if (isEqual) {
             const authToken = TokenGenerator.generate({
-                username: userDetails.username,
+                firstName: userDetails.firstName,
                 email: userDetails.email,
             });
-            const deviceTokenExist = userDetails.deviceToken.find(token => token === deviceToken);
-            if (!deviceTokenExist) {
-                userDetails.deviceToken.push(deviceToken);
-                this.userController.updateUser(userDetails).then(() => {
-                    console.log(userDetails);
-                });
-            }
-            return new UserResponseModel(userDetails.username, userDetails.firstName, userDetails.email, userDetails.phoneNumber, authToken, userDetails.lastName, userDetails.imageUrl);
+        
+            return new UserResponseModel(userDetails.firstName, userDetails.email, userDetails.phoneNumber, authToken, userDetails.lastName);
         } else {
             return new HttpException(HttpStatusCode.UNPROCESSABLE_ENTITY, {
                 message: "Incorrect credentails entered",
@@ -46,9 +40,9 @@ export class AuthService {
             });
         }
         const authToken = TokenGenerator.generate({
-            username: newUser.username,
+            firstName: newUser.firstName,
             email: newUser.email,
         });
-        return new UserResponseModel(newUser.username, newUser.firstName, newUser.email, newUser.phoneNumber, authToken, newUser.lastName, newUser.imageUrl);
+        return new UserResponseModel(newUser.firstName, newUser.email, newUser.phoneNumber, authToken, newUser.lastName);
     }
 }

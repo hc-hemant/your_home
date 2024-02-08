@@ -4,7 +4,7 @@ export class TokenGenerator {
 
     static readonly privateKey = "jaimatadijaishreeram";
 
-    public static generate(payload: { username: string, email: string }): string {
+    public static generate(payload: { firstName: string, email: string }): string {
         return jwt.sign(payload, TokenGenerator.privateKey);
     }
 

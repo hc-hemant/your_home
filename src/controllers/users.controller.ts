@@ -12,12 +12,12 @@ export class UserController {
         this.userDB = new UserData();
     }
 
-    async findUser(username: string): Promise<IUser | HttpException> {
-        const user = await this.userDB.findUserByUsername(username);
+    async findUser(email: string): Promise<IUser | HttpException> {
+        const user = await this.userDB.findUserByEmail(email);
         if (!user) {
             return new HttpException(HttpStatusCode.UNPROCESSABLE_ENTITY, {
                 error: ErrorCode.NOT_EXIST,
-                message: "Incorrect username.username does not exist."
+                message: "Email does not exist."
             })
         }
         return user;
