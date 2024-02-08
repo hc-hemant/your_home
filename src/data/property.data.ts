@@ -12,7 +12,7 @@ export class PropertyData {
     async getAllProperty(query: { [key: string]: any }, limit: number, skip: number, sortProperty: string, order: number): Promise<IGetAllPropertyResponse> {
         const asyncQueries: [Promise<number>, Promise<Array<IProperty>>] = [
             propertyModel.countDocuments(query).exec(),
-            propertyModel.find(query).sort({ [sortProperty]: order }).skip(skip).limit(limit).exec()
+            propertyModel.find(query).skip(skip).limit(limit).exec()
         ];
 
         const [count, properties] = await Promise.all(asyncQueries);

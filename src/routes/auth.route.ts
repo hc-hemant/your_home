@@ -10,10 +10,9 @@ const authController = new AuthController();
 router.post('/signin', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const deviceToken = req.body.deviceToken;
 
     if (username && password) {
-        authController.signInUser(username, password, deviceToken).then(user => {
+        authController.signInUser(username, password).then(user => {
             res.status(200).send(user);
         });
     } else {
@@ -29,7 +28,6 @@ router.post('/signin', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-
     authController.signUpUser(req).then(user => {
         res.status(200).send(user);
     }).catch(error => {

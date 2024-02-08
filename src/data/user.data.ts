@@ -3,8 +3,8 @@ import { IUser } from "../models/users/User.interface";
 
 export class UserData {
 
-    findUserByUsername(username: string): Promise<IUser | null> {
-        return UserModel.findOne({ username }).exec();
+    findUserByEmail(email: string): Promise<IUser | null> {
+        return UserModel.findOne({ email }).exec();
     }
 
     async addUser(userDetails: IUser): Promise<IUser> {
@@ -13,6 +13,6 @@ export class UserData {
     }
 
     async updateUser(userDetails: IUser) {
-        await UserModel.updateOne({ username: userDetails.username }, userDetails).exec();
+        await UserModel.updateOne({ email: userDetails.email }, userDetails).exec();
     }
 }

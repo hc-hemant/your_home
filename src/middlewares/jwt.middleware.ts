@@ -9,8 +9,8 @@ export const jwtMiddleware = (req: Request, res: Response, next: NextFunction) =
     if (!token) return res.status(403).send();
     const decodedToken = TokenGenerator.decode(token as string);
     if (!decodedToken) return res.status(403).send();
-    const username = (<{ [key: string]: string }>decodedToken)["username"];
-    userData.findUserByUsername(username).then(value => {
+    const email = (<{ [key: string]: string }>decodedToken)["email"];
+    userData.findUserByEmail(email).then(value => {
         if (!value) {
             return res.status(403).send();
         } else {

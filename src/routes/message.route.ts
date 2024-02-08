@@ -11,12 +11,12 @@ router.post('/user', async (req, res) => {
 
     const from = req.body.user.username;
     if (to && message && from) {
-        const messageRes = await messageController.sendMessageToUser(to, message, from, date);
-        if (messageRes) {
-            res.status(500).send();
-        } else {
-            res.status(200).send();
-        }
+        // const messageRes = await messageController.sendMessageToUser(to, message, from, date);
+        // if (messageRes) {
+        //     res.status(500).send();
+        // } else {
+        //     res.status(200).send();
+        // }
     } else {
         res.status(400).send();
     }
